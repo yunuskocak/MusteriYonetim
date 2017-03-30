@@ -23,9 +23,41 @@
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">  
+		
+<script  src="js/jquery-3.2.0.min.js" ></script>		
+	<script>
 	
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
- 
+	 $(document).ready(function()
+        {
+			
+			$('#gonder').click(function() {
+			
+			var veri =
+                {
+                    kullaniciAdi: $('#inputKullaniciAdi').val(),
+                    parola: $('#inputPassword').val()
+                };
+				
+                $.ajax({
+                    url: "ajaxLogin.php",
+                    type: 'POST',
+                    data: veri,
+                    success: function(msg)
+                    {	
+						alert("Kayıt başarıyla eklenmiştir...");
+                    },
+                    error: function()
+                    {
+                        alert("Hata meydana geldi. Lütfen tekrar deneyiniz !!!");
+                    }
+                });
+			});
+		
+		});
+		 
+		
+		
+	</script>
   </head>
 
   <body>
@@ -35,17 +67,16 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Giriş</h2>
         <label for="inputEmail" class="sr-only">Kullanıcı Adı</label>
-        <input id="inputEmail" class="form-control" placeholder="Kullanıcı Adı" required autofocus>
+        <input id="inputKullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" required autofocus>
         <label for="inputPassword" class="sr-only">Parola</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Parola" required>
          
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Giriş Yap</button>
-      </form>
+		<!--<input style="" type="submit"  class="btn btn-lg btn-primary btn-block" id="girisYap" value="Giriş Yap" />-->
+        <input type="submit" id="gonder" value="Kaydet"/>
+
+       </form>
 
     </div> <!-- /container -->
 
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
