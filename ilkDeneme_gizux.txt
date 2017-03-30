@@ -1,1 +1,5 @@
-gizux'un ilk denemesi :)
+<<<<<<< HEAD
+gizux'un ilk denemesi :) hj j hj hj 
+=======
+gizux'un ilk denemesi :) deneme
+>>>>>>> origin/master
