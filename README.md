@@ -1,0 +1,2 @@
+# MusteriYonetim
+Müsteri Tanım Bilgileri
