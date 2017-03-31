@@ -1,15 +1,12 @@
 <?php
 
-	$sunucu="localhost";
-	$veritabani="Musteri";
-	$kullaniciAdi="ykocak";
-	$sifre="YKocak25";  
-	
-	$baglantiNo= pg_connect("host=$sunucu dbname=$veritabani user=$kullaniciAdi password=$sifre");
-	
-	if (pg_last_error())
-	{
-		echo "bağlantı başarısız... " . pg_last_error();
-	}
+	if (!@$baglanti=mysql_connect("localhost","root","g1z3mu91")){
+    die("Mysql'e bağlantı kurulamadı!".mysql_error());
+}
+ 
+if (!@mysql_select_db("musteri",$baglanti)){
+    die("Veritabanına bağlantı kurulamadı!".mysql_error());
+}
 	
 ?>
+

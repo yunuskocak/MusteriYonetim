@@ -23,60 +23,58 @@
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">  
+	
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		
 <script  src="js/jquery-3.2.0.min.js" ></script>		
-	<script>
 	
-	 $(document).ready(function()
-        {
-			
-			$('#gonder').click(function() {
-			
-			var veri =
-                {
-                    kullaniciAdi: $('#inputKullaniciAdi').val(),
-                    parola: $('#inputPassword').val()
-                };
-				
-                $.ajax({
-                    url: "ajaxLogin.php",
-                    type: 'POST',
-                    data: veri,
-                    success: function(msg)
-                    {	
-						alert("Kayıt başarıyla eklenmiştir...");
-                    },
-                    error: function()
-                    {
-                        alert("Hata meydana geldi. Lütfen tekrar deneyiniz !!!");
-                    }
-                });
-			});
+  </head>
+
+  <body>
+
+    <div class="container">
+      <form class="form-signin" id="girisForm">
+        <h2 class="form-signin-heading">Giriş</h2>
+        <label >Kullanıcı Adı</label>
+        <input id="inputKullaniciAdi" name="inputKullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" autofocus>
+        <label >Parola</label>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Parola" >
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" id="gonder">Giriş</button>         
+		<!-- <input type="button" class="btn btn-lg btn-primary btn-block" id="gonder" value="Kaydet" />-->
+
+       </form>
+
+    </div> <!-- /container -->
+<script>
+	
+	 $(document).ready(function(){
+		 
+		 	$('#gonder').click(function() {
+				var form_data=$('form :input').serialize();
+		
+				$.ajax({
+					type: "POST",
+					url: 'ajaxLogin.php',                        
+					dataType : 'json',
+					data: form_data,
+					success: function (data) {
+							if(data.sonuc == '0')
+								alert("Yetkiler yetersiz");
+							else
+								alert("giriş yapıldı");
+							},
+					error: function (sss) {
+							alert("Error!!!"+sss.responseText);
+							}
+					  });
+				});
 		
 		});
 		 
 		
 		
 	</script>
-  </head>
-
-  <body>
-
-    <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Giriş</h2>
-        <label for="inputEmail" class="sr-only">Kullanıcı Adı</label>
-        <input id="inputKullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" required autofocus>
-        <label for="inputPassword" class="sr-only">Parola</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Parola" required>
-         
-		<!--<input style="" type="submit"  class="btn btn-lg btn-primary btn-block" id="girisYap" value="Giriş Yap" />-->
-        <input type="submit" id="gonder" value="Kaydet"/>
-
-       </form>
-
-    </div> <!-- /container -->
-
   </body>
 </html>
