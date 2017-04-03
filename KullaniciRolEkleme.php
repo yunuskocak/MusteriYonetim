@@ -1,16 +1,30 @@
 <!DOCTYPE html>
+<?php
+ require_once "VeritabaniBaglanti.php";
+
+$sql="SELECT kullaniciAdi FROM kullanici where aktif='1'";
+ 
+$kullanicilar = mysql_query($sql);
+
+if (!$kullanicilar) {
+    echo 'Could not run query: ' . mysql_error();
+    exit;
+}
+
+mysql_close(); 
+
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
-    <meta name="author" content="gizux, ykocak">
+    <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>Müşteri Yönetim</title>
-
-    <!-- Bootstrap CSS -->    
+<!-- Bootstrap CSS -->    
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
     <link href="assets/css/bootstrap-theme.css" rel="stylesheet">
@@ -21,16 +35,18 @@
     <link href="assets/css/style-responsive.css" rel="stylesheet" />
 	<link href="assets/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
   </head>
-
   <body>
   <!-- container section start -->
   <section id="container" class="">
       <header class="header dark-bg">
-            <a href="Anasayfa.php" class="logo">Müşteri Yönetim</a>
+            <!--logo start-->
+            <a href="Anasayfa.html" class="logo">Müşteri Yönetim</a>
+            <!--logo end-->
 
             <div class="top-nav notification-row" >                
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
+                    <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="username" id ="AdSoyad"></span>
@@ -46,7 +62,9 @@
                             </li>
                         </ul>
                     </li>
+                    <!-- user login dropdown end -->
                 </ul>
+                <!-- notificatoin dropdown end-->
             </div>
       </header>      
       <!--header end-->
@@ -62,9 +80,9 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="MusteriGoruntuleme.php">Müşteri İşlemleri</a></li>                          
-                          <li><a class="" href="MusteriEkleme.php">Müşteri Ekleme</a></li>                      
-                          <li><a class="" href="KullaniciEkleme.php" id="liKullaniciEkleme">Kullanıcı Ekleme</a></li>            
-                          <li><a class="" href="KullaniciRolEkleme.php" id="liKullaniciRolEkleme">Kullanıcı Rol Ekleme</a></li>                           
+						  <li><a class="" href="MusteriEkleme.php">Müşteri Ekleme</a></li>                    
+                          <li><a class="" href="KullaniciEkleme.php" id="liKullaniciEkleme">Kullanıcı Ekleme</a></li>                  
+                          <li><a class="" href="KullaniciRolEkleme.php" id="liKullaniciRolEkleme">Kullanıcı Rol Ekleme</a></li>                        
                           <!--<li><a class="" href="MusteriGuncelleme.php">Müşteri Güncelleme</a></li>-->
                           <!--<li><a class="" href="MusteriSilme.php">Müşteri Silme</a></li>-->
                       </ul>
@@ -85,34 +103,64 @@
       <section id="main-content">
           <section class="wrapper">            
               <!--overview start-->
-			  <div class="row">
+    <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"> Dashboard</h3>
+					<h3 class="page-header"> Kullanıcı Rol Ekleme</h3>
 					<ol class="breadcrumb">
 						<li><a href="Anasayfa.php">Anasayfa</a></li>
-						<li>Dashboard</li>						  	
+						<li>Kullanıcı Ekleme</li>						  	
 					</ol>
 				</div>
 			</div>
-              
-            <div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<span class="count" id="MusteriSayi"></span>
-						<div class="title">Toplam Müşteri Sayısı</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-						<span class="count" id="AktifMusteriSayi"></span>
-						<div class="title">Aktif Müşteri Sayısı</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-			</div><!--/.row-->
-		
+		   <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                             Kullanıcı Bilgileri
+                          </header>
+                          <div class="panel-body">
+                              <div class="form">
+                                  <form class="form-validate form-horizontal " id="register_form" method="get" action="">
+                                      <div class="form-group ">
+                                          <label for="username" class="control-label col-lg-2">Kullanıcı Adı <span class="required">*</span></label>
+                                          <div class="col-lg-4">
+											<?php echo '<select name="inputKAdi" id="inputKAdi">';
+											while ($KullaniciAdiRow = mysql_fetch_row($kullanicilar))
+											{
+													echo '<option value="'.$KullaniciAdiRow[0].'" >'.$KullaniciAdiRow[0].'</option>';
+											}
+											echo "</select>";
+											?>
+									  </div>
+                                      </div>
+                                      <div class="form-group ">
+                                        <label class="control-label col-lg-2">Yetki Kodu <span class="required">*</span></label>
+										<div class="col-lg-4">
+											<table>
+												<tr>
+													<td>
+													<select name="inputYetki" id="inputYetki">
+													<option value= "Admin">Admin</option>
+													<option selected="selected" value= "User">User</option>
+													</select>
+													</td>
+												</tr>
+											</table>
+										</div>
+                                      </div>
+                                      <div class="form-group">
+                                          <div class="col-lg-offset-2 col-lg-10">
+                                              <button class="btn btn-primary" type="submit" id="KullaniciRolEkle">Kaydet</button>
+                                              <a class="btn btn-default" href="KullaniciRolEkleme.php">İptal</a>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </section>
+                  </div>
+              </div>
           </section>
-          
       </section>
       <!--main content end-->
   </section>
@@ -132,25 +180,38 @@
     <script src="assets/jquery-knob/js/jquery.knob.js"></script>
     <script src="js/jquery.sparkline.js" type="text/javascript"></script>
     <script src="js/owl.carousel.js" ></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+    <!-- custom form validation script for this page-->
+    <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
   <script>
-
-      //carousel
+ 
       $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          }); 
-		  
-	
+          
+        $('#mesaj').hide();
+		$('#mesajSuccess').hide();
+		
 	document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad');
-	document.getElementById("MusteriSayi").innerHTML = getCookie('MusteriSayi');
-	document.getElementById("AktifMusteriSayi").innerHTML = getCookie('AktifMusteriSayi');
 
+		   	$('#KullaniciRolEkle').click(function() {
+				var form_data=$('form :input').serialize();
+		
+				$.ajax({
+					type: "POST",
+					url: 'ajaxKullaniciRolEkleme.php',                        
+					dataType : 'json',
+					data: form_data,
+					success: function (data) {
+								alert("Kayıt Yapıldı");
+							},
+					error: function (sss) {
+                               alert("Kayıt Yapılamadı");
+							}
+					  });
+				});
+				
 	if(getCookie('yetki') == 'Admin'){
 		document.getElementById("liKullaniciRolEkleme").style.display = "block";
 		document.getElementById("liKullaniciEkleme").style.display = "block";
@@ -164,12 +225,11 @@
 		window.location = "login.php";
 	}
 	
-	$('#Logout').click(function() {
+				$('#Logout').click(function() {
 				deleteAllCookies();
 				window.location = "login.php";
-		});
-	  
-});
+					});
+      });
 	  
 	  function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -181,7 +241,7 @@
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
 }
-	
+
 	  function getCookie(cname) {
 		var name = cname + "=";
 		var decodedCookie = decodeURIComponent(document.cookie);
@@ -197,7 +257,8 @@
 			}
 		return "";
 	}
-
+ 
+ 
   </script>
 
   </body>

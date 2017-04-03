@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
-    <meta name="author" content="gizux, ykocak">
+    <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>Müşteri Yönetim</title>
-
-    <!-- Bootstrap CSS -->    
+<!-- Bootstrap CSS -->    
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
     <link href="assets/css/bootstrap-theme.css" rel="stylesheet">
@@ -26,11 +26,14 @@
   <!-- container section start -->
   <section id="container" class="">
       <header class="header dark-bg">
+            <!--logo start-->
             <a href="Anasayfa.php" class="logo">Müşteri Yönetim</a>
+            <!--logo end-->
 
             <div class="top-nav notification-row" >                
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
+                    <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="username" id ="AdSoyad"></span>
@@ -46,7 +49,9 @@
                             </li>
                         </ul>
                     </li>
+                    <!-- user login dropdown end -->
                 </ul>
+                <!-- notificatoin dropdown end-->
             </div>
       </header>      
       <!--header end-->
@@ -62,9 +67,9 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="MusteriGoruntuleme.php">Müşteri İşlemleri</a></li>                          
-                          <li><a class="" href="MusteriEkleme.php">Müşteri Ekleme</a></li>                      
+                          <li><a class="" href="MusteriEkleme.php">Müşteri Ekleme</a></li>             
                           <li><a class="" href="KullaniciEkleme.php" id="liKullaniciEkleme">Kullanıcı Ekleme</a></li>            
-                          <li><a class="" href="KullaniciRolEkleme.php" id="liKullaniciRolEkleme">Kullanıcı Rol Ekleme</a></li>                           
+                          <li><a class="" href="KullaniciRolEkleme.php" id="liKullaniciRolEkleme">Kullanıcı Rol Ekleme</a></li>                         
                           <!--<li><a class="" href="MusteriGuncelleme.php">Müşteri Güncelleme</a></li>-->
                           <!--<li><a class="" href="MusteriSilme.php">Müşteri Silme</a></li>-->
                       </ul>
@@ -83,34 +88,37 @@
       
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">            
-              <!--overview start-->
-			  <div class="row">
+          <section class="wrapper">   
+		<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"> Dashboard</h3>
+					<h3 class="page-header"> Müşteri Görüntüleme</h3>
 					<ol class="breadcrumb">
 						<li><a href="Anasayfa.php">Anasayfa</a></li>
-						<li>Dashboard</li>						  	
+						<li> Müşteri Görüntüleme</li>						  	
 					</ol>
 				</div>
-			</div>
-              
-            <div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<span class="count" id="MusteriSayi"></span>
-						<div class="title">Toplam Müşteri Sayısı</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-						<span class="count" id="AktifMusteriSayi"></span>
-						<div class="title">Aktif Müşteri Sayısı</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-			</div><!--/.row-->
-		
+			</div>		  
+               <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                               Müşteri Bilgileri
+                          </header> 
+						<div class="form-group ">
+								<label for="username" class="control-label col-lg-2">Kullanıcı Adı  </label>
+								<div class="col-lg-4">
+									<input class="form-control " id="inputKAdi" name="inputKAdi" type="text" />
+								</div>
+								<div class="col-lg-4">
+									 <p class="btn btn-primary"  id="MusteriAra">Ara</p>
+								</div>
+                        </div> 
+ 						
+						<div id="divMusteriBilgileri"></div>
+						
+                      </section>
+                  </div>
+              </div>
           </section>
           
       </section>
@@ -132,25 +140,57 @@
     <script src="assets/jquery-knob/js/jquery.knob.js"></script>
     <script src="js/jquery.sparkline.js" type="text/javascript"></script>
     <script src="js/owl.carousel.js" ></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+    <!-- custom form validation script for this page-->
+    <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
   <script>
-
-      //carousel
+ 
       $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          }); 
 		  
-	
-	document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad');
-	document.getElementById("MusteriSayi").innerHTML = getCookie('MusteriSayi');
-	document.getElementById("AktifMusteriSayi").innerHTML = getCookie('AktifMusteriSayi');
-
+			document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad').replace('+',' ');
+			
+			var form_data=$('form :input').serialize();
+			 
+			$.ajax({
+				url: 'ajaxMusteriGoruntuleme.php',
+				type: 'POST',
+				//dataType: 'json',
+				data: form_data,
+				success: function(msg)
+				{	  
+					$('#divMusteriBilgileri').html(msg).fadeIn("slow");//.fadeOut("slow");
+				},
+				error: function()
+				{
+					alert("Hata meydana geldi, lütfen tekrar deneyiniz !!!");
+				}
+			});
+			 $('#MusteriAra').click(function() {
+				
+				var kullAdi=document.getElementById("inputKAdi").value;
+				 
+				 var form_data =
+					{
+						inputKAdi: kullAdi 
+					};
+					
+					$.ajax({
+						type: "POST",
+						url: 'ajaxMusteriGoruntuleme.php',                        
+						//dataType: 'json',
+						data: form_data ,
+						success: function (msg) {
+								$('#divMusteriBilgileri').html(msg).fadeIn("slow");//.fadeOut("slow"); 
+							 },
+						error: function (sss) {
+									alert("Müşteri bilgileri alınırken bir hata oluştu");
+								}
+						 }); 
+				 }); //MusteriAra
+				 
 	if(getCookie('yetki') == 'Admin'){
 		document.getElementById("liKullaniciRolEkleme").style.display = "block";
 		document.getElementById("liKullaniciEkleme").style.display = "block";
@@ -164,12 +204,11 @@
 		window.location = "login.php";
 	}
 	
-	$('#Logout').click(function() {
+				 $('#Logout').click(function() {
 				deleteAllCookies();
 				window.location = "login.php";
-		});
-	  
-});
+					});
+      });//DocumentReady
 	  
 	  function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -181,7 +220,32 @@
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
 }
-	
+
+	  function MusteriSil(id){
+		  
+				var form_data =
+					{
+						id: id 
+					};
+					
+				$.ajax({
+					type: "POST",
+					url: 'ajaxMusteriSilme.php',                        
+					dataType : 'json',
+					data: form_data ,
+					success: function (data) {
+								if (data['sonuc']=='1'){
+									alert('Müşteri Silindi');
+									window.location='MusteriGoruntuleme.php';
+								}else 
+									alert("Müşteri Silme İşleminde Hata Oluştu")
+							},
+					error: function (sss) {
+                                alert("Müşteri Silme İşleminde Hata Oluştu");
+							}
+					  }); 
+	  }
+	  
 	  function getCookie(cname) {
 		var name = cname + "=";
 		var decodedCookie = decodeURIComponent(document.cookie);
@@ -197,7 +261,7 @@
 			}
 		return "";
 	}
-
+ 
   </script>
 
   </body>

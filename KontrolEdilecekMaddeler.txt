@@ -1,0 +1,5 @@
+﻿1. maddeye bakılacak
+5. maddeye bakılacak
+
+müşteri güncellenince uyarı vermiyor
+cancel butonunun arkası yazılacak

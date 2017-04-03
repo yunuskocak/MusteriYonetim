@@ -60,10 +60,13 @@
 					dataType : 'json',
 					data: form_data,
 					success: function (data) {
-							if(data.sonuc == '0')
-								alert("Yetkiler yetersiz");
-							else
-								alert("giriş yapıldı");
+								if (data['sonuc']=='1')
+								{
+									window.location = 'AnaSayfa.php';
+								}
+								else if(data['sonuc'] == '0'){
+									alert("Yetkiler yetersiz");
+								}
 							},
 					error: function (sss) {
 							alert("Error!!!"+sss.responseText);
