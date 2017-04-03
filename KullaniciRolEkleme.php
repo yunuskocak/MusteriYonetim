@@ -83,9 +83,7 @@ mysql_close();
 						  <li><a class="" href="MusteriEkleme.php">Müşteri Ekleme</a></li>                    
                           <li><a class="" href="KullaniciEkleme.php" id="liKullaniciEkleme">Kullanıcı Ekleme</a></li>                  
                           <li><a class="" href="KullaniciRolEkleme.php" id="liKullaniciRolEkleme">Kullanıcı Rol Ekleme</a></li>                        
-                          <!--<li><a class="" href="MusteriGuncelleme.php">Müşteri Güncelleme</a></li>-->
-                          <!--<li><a class="" href="MusteriSilme.php">Müşteri Silme</a></li>-->
-                      </ul>
+                       </ul>
                   </li>       
 				  <li class="sub-menu">
                   <li>                     
@@ -150,7 +148,7 @@ mysql_close();
                                       </div>
                                       <div class="form-group">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit" id="KullaniciRolEkle">Kaydet</button>
+                                              <p class="btn btn-primary" id="KullaniciRolEkle">Kaydet</p>
                                               <a class="btn btn-default" href="KullaniciRolEkleme.php">İptal</a>
                                           </div>
                                       </div>

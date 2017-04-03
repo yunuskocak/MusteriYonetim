@@ -171,9 +171,6 @@
  
       $(document).ready(function() {
           
-        $('#mesaj').hide();
-		$('#mesajSuccess').hide();
-		
 	document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad').replace('+',' ');
 
 		   	$('#MusteriEkle').click(function() {

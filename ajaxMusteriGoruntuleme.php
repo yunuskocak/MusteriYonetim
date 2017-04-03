@@ -4,7 +4,7 @@
 
 if(!$_POST['inputKAdi'])
 	$sql="SELECT * FROM musteri";
-else
+else 
 	$sql="SELECT * FROM musteri where kullaniciAdi ='".$_POST['inputKAdi']."'";
 	
 $result = mysql_query($sql);

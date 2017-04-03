@@ -86,12 +86,7 @@
       <!--sidebar end-->
       
       <!--main content start-->
-	  <div class="alert alert-danger" id="mesaj">
-                    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-                </div>
-				<div class="alert alert-success" id="mesajSuccess">
-                    <strong>Success!</strong> Indicates a dangerous or potentially negative action.
-                </div>
+	 
       <section id="main-content">
           <section class="wrapper">            
               <!--overview start-->
@@ -139,7 +134,7 @@
                                       </div>
                                       <div class="form-group">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit" id="KullaniciEkle">Kaydet</button>
+                                              <p class="btn btn-primary"  id="KullaniciEkle">Kaydet</p>
                                               <a class="btn btn-default" href="KullaniciEkleme.php">İptal</a>
                                           </div>
                                       </div>
@@ -177,12 +172,8 @@
     <script src="js/scripts.js"></script>
   <script>
  
-      $(document).ready(function() {
-          
-        $('#mesaj').hide();
-		$('#mesajSuccess').hide();
-		
-	document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad');
+      $(document).ready(function() { 
+		document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad');
 
 		   	$('#KullaniciEkle').click(function() {
 				var form_data=$('form :input').serialize();
@@ -201,23 +192,23 @@
 					  });
 				});
 				
-	if(getCookie('yetki') == 'Admin'){
-		document.getElementById("liKullaniciRolEkleme").style.display = "block";
-		document.getElementById("liKullaniciEkleme").style.display = "block";
-	  }
-	else if(getCookie('yetki') == 'User'){
-		document.getElementById("liKullaniciRolEkleme").style.display = "none";
-		document.getElementById("liKullaniciEkleme").style.display = "none";
-	}
-	else {
-		alert("Lütfen yetkiniz dahilinde giriş yapınız.");
-		window.location = "login.php";
-	}
-	
-				$('#Logout').click(function() {
-				deleteAllCookies();
+			if(getCookie('yetki') == 'Admin'){
+				document.getElementById("liKullaniciRolEkleme").style.display = "block";
+				document.getElementById("liKullaniciEkleme").style.display = "block";
+			  }
+			else if(getCookie('yetki') == 'User'){
+				document.getElementById("liKullaniciRolEkleme").style.display = "none";
+				document.getElementById("liKullaniciEkleme").style.display = "none";
+			}
+			else {
+				alert("Lütfen yetkiniz dahilinde giriş yapınız.");
 				window.location = "login.php";
-					});
+			}
+	
+			$('#Logout').click(function() {
+					deleteAllCookies();
+					window.location = "login.php";
+			 });
       });
 	  
 	  function deleteAllCookies() {

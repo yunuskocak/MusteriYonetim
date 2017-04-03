@@ -151,13 +151,14 @@ mysql_close();
                                           </div>
                                       </div> 
 									  <div class="form-group ">
-                                          <label for="agree" class="control-label"> Aktif mi? <span class="required">*</span></label>
-										  <div class="col-lg-4">
-											<input  type="checkbox" style="width: 20px" class="checkbox form-control col-lg-2" id="agree" name="agree" />
-                                          </div>
-										  
-                                      </div>
-                                      <div class="form-group">
+                                          <label for="email" class="control-label col-lg-2">Aktif ? <span class="required">*</span></label>
+                                          <div class="col-lg-4">
+									        <label>
+												<input type="checkbox" id="chkAktif" name="chkAktif"   style="width:50px; margin-top:10px;height:20px" value="">
+											</label>
+										  </div>
+                                      </div> 
+									  <div class="form-group">
                                           <div class="col-lg-offset-2 col-lg-10">
                                               <p class="btn btn-primary" id="MusteriGuncelle">Güncelle</p>
                                               <a class="btn btn-default" href="MusteriGuncelleme.php?ID=<?php echo $output['ID']; ?>" >İptal</a>
