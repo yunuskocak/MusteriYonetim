@@ -129,19 +129,19 @@ mysql_close();
                                       <div class="form-group ">
                                           <label for="fullname" class="control-label col-lg-2">İsim <span class="required">*</span></label>
                                           <div class="col-lg-4">
-                                              <input class=" form-control" id="inputAdSoyad" name="inputAdSoyad" type="text" value="<?php echo $rowMusteriBilgileri[0] ?>"/>
+                                              <input class=" form-control" maxlength="40" id="inputAdSoyad" name="inputAdSoyad" type="text" value="<?php echo $rowMusteriBilgileri[0] ?>"/>
                                           </div>
                                       </div>
                                       <div class="form-group ">
                                           <label for="address" class="control-label col-lg-2">Adres <span class="required">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class=" form-control" id="inputAdres" name="inputAdres" type="text" value="<?php echo $rowMusteriBilgileri[1] ?>"/>
+                                              <input class=" form-control" maxlength="50" id="inputAdres" name="inputAdres" type="text" value="<?php echo $rowMusteriBilgileri[1] ?>"/>
                                           </div>
                                       </div>
                                       <div class="form-group ">
                                           <label for="username" class="control-label col-lg-2">Kullanıcı Adı <span class="required">*</span></label>
                                           <div class="col-lg-4">
-                                              <input class="form-control " id="inputKAdi" name="inputKAdi" type="text" value="<?php echo $rowMusteriBilgileri[2] ?>"/>
+                                              <input class="form-control " maxlength="20" id="inputKAdi" name="inputKAdi" type="text" value="<?php echo $rowMusteriBilgileri[2] ?>"/>
                                           </div>
                                       </div> 
                                       <div class="form-group ">

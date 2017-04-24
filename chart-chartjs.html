@@ -85,66 +85,11 @@
       
       <!--main content start--> 
       <section id="main-content">
-          <section class="wrapper">            
-              <!--overview start-->
-			<div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"> Müşteri Ekleme</h3>
-					<ol class="breadcrumb">
-						<li><a href="Anasayfa.php">Anasayfa</a></li>
-						<li>Müşteri Ekleme</li>						  	
-					</ol>
-				</div>
-			</div>
-		   <div class="row">
-                  <div class="col-lg-12">
-                      <section class="panel">
-                          <header class="panel-heading">
-                             Müşteri Bilgileri
-                          </header>
-                          <div class="panel-body">
-                              <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" method="get" action="">
-                                      <div class="form-group ">
-                                          <label for="fullname" class="control-label col-lg-2">İsim <span class="required">*</span></label>
-                                          <div class="col-lg-4">
-                                              <input class=" form-control" id="inputAdSoyad" name="inputAdSoyad" type="text" />
-                                          </div>
-                                      </div>
-                                      <div class="form-group ">
-                                          <label for="address" class="control-label col-lg-2">Adres <span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class=" form-control" id="inputAdres" name="inputAdres" type="text" />
-                                          </div>
-                                      </div>
-                                      <div class="form-group ">
-                                          <label for="username" class="control-label col-lg-2">Kullanıcı Adı <span class="required">*</span></label>
-                                          <div class="col-lg-4">
-                                              <input class="form-control " id="inputKAdi" name="inputKAdi" type="text" />
-                                          </div>
-                                      </div> 
-                                      <div class="form-group ">
-                                          <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
-                                          <div class="col-lg-4">
-                                              <input class="form-control " id="inputEmail" name="inputEmail" type="email" />
-                                          </div>
-                                      </div>
-                                      <div class="form-group">
-                                          <div class="col-lg-offset-2 col-lg-10">
-                                              <p class="btn btn-primary"  id="MusteriEkle">Kaydet</p>
-                                              <a class="btn btn-default" href="MusteriEkleme.php" >İptal</a>
-                                          </div>
-                                      </div>
-                                  </form>
-                              </div>
-                          </div>
-                      </section>
-                  </div>
-              </div>
-          </section>
-      </section>
+          <section class="wrapper">  
+			Yakında...
+		   </section>
       <!--main content end-->
-  </section>
+	   </section>
   <!-- container section start -->
 
     <!-- javascripts -->
@@ -172,23 +117,6 @@
       $(document).ready(function() {
           
 	document.getElementById("AdSoyad").innerHTML = getCookie('AdSoyad').replace('+',' ');
-
-		   	$('#MusteriEkle').click(function() {
-				var form_data=$('form :input').serialize();
-		
-				$.ajax({
-					type: "POST",
-					url: 'ajaxMusteriEkleme.php',                        
-					dataType : 'json',
-					data: form_data,
-					success: function (data) {
-								alert('Müşteri Ekleme İşlemi Başarıyla Tamamlandı');
-							},
-					error: function (sss) {
-                                alert('Müşteri Ekleme İşleminde Hata Oluştur'+sss.responseText.replace("null",""));
-							}
-					  });
-				});
 		
 	if(getCookie('yetki') == 'Admin'){
 		document.getElementById("liKullaniciRolEkleme").style.display = "block";

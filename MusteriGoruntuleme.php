@@ -107,7 +107,7 @@
 						<div class="form-group ">
 								<label for="username" class="control-label col-lg-2">Kullanıcı Adı  </label>
 								<div class="col-lg-4">
-									<input class="form-control " id="inputKAdi" name="inputKAdi" type="text" />
+									<input class="form-control " maxlength="20" id="inputKAdi" name="inputKAdi" type="text" />
 								</div>
 								<div class="col-lg-4">
 									 <p class="btn btn-primary"  id="MusteriAra">Ara</p>

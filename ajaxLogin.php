@@ -2,7 +2,14 @@
 
  require_once "VeritabaniBaglanti.php";
  
-$sql="SELECT * FROM kullanici where kullaniciAdi = '".$_POST['inputKullaniciAdi']."' and parola = '".$_POST['inputPassword']."'";
+ $kullaniciAdiStr = filter_var($_POST['inputKullaniciAdi'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+ $kullaniciSifreStr = filter_var($_POST['inputPassword'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+ 
+  if (strlen($kullaniciAdiStr)>20)
+	echo "Kullanıcı Adı  Girişi Max 20 Karakter Olmalıdır";
+ 
+ $sql="SELECT * FROM kullanici where kullaniciAdi=";
+ $sql =$sql . "'".$kullaniciAdiStr."' and parola = '".$kullaniciSifreStr."'";
 
 	$result = mysql_query($sql);
 	
@@ -12,6 +19,7 @@ if (!$result) {
 }
 
 $row = mysql_fetch_row($result);
+
 if($row[0] == null)
 	$data= array ('sonuc'=>'0');
 else{
@@ -48,18 +56,21 @@ $aktifMusteriRow = mysql_fetch_row($aktifMusteriSayi);
 
 
 //Kullanıcı bazlı rol sorgusu
-$kullaniciRol = "SELECT yetkiKodu FROM kullaniciyetki WHERE kullaniciAdi='".$_POST['inputKullaniciAdi']."'";
+$kullaniciRol = "SELECT yetkiKodu FROM kullaniciyetki WHERE kullaniciAdi='".$kullaniciAdiStr."'";
  $kulRol = mysql_query($kullaniciRol);
  
 if(!$kulRol) {
     echo 'Could not run musteri query: ' . mysql_error();
     exit;
 }
+
 $kullaniciRolRow = mysql_fetch_row($kulRol);
  
 	setcookie("yetki", $kullaniciRolRow[0]); 
 //Kullanıcı bazlı rol end
-	
 }
+
+//session_start();
+//$_session['login_time']=time();
 	
 	echo json_encode($data);

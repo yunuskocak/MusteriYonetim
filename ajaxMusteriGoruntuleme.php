@@ -1,20 +1,20 @@
 <?php
-
+ 
  require_once "VeritabaniBaglanti.php";
 
+ $kullaniciAdiStr=filter_var($_POST['inputKAdi'], FILTER_SANITIZE_STRING); 
+
+ if (strlen($kullaniciAdiStr)>20)
+	echo "Kullanıcı Adı Girişi Max 20 Karakter Olmalıdır";
+
+ 
 if(!$_POST['inputKAdi'])
 	$sql="SELECT * FROM musteri";
 else 
-	$sql="SELECT * FROM musteri where kullaniciAdi ='".$_POST['inputKAdi']."'";
+	$sql="SELECT * FROM musteri where kullaniciAdi ='".$kullaniciAdiStr."'";
 	
 $result = mysql_query($sql);
  
-//$musteriBilgileri=mysql_fetch_row($result);
-
-// $sorguSonucuIl = mysqli_query($baglantiNo, "SELECT * FROM iller");
-// $sorguSonucuIlce = mysqli_query($baglantiNo, "SELECT * FROM ilceler where il={$kayit[9]}");
- 
-
  mysql_close(); 
 
 ?>
@@ -31,8 +31,13 @@ $result = mysql_query($sql);
 	<?php 
 		while ($row1 = mysql_fetch_row($result))
 		{
+			$rowAdSoyadStr=filter_var($row1[0], FILTER_SANITIZE_STRING);
+			$rowAdresStr=filter_var($row1[1], FILTER_SANITIZE_STRING);
+			$rowKadiStr=filter_var($row1[2], FILTER_SANITIZE_STRING);
+			$rowEmailStr=filter_var($row1[3], FILTER_SANITIZE_STRING);
+			
 			echo ' <tr> ';
-			echo '<td>'.$row1[0].'</td><td>'.$row1[1].'</td><td>'.$row1[2].'</td><td>'.$row1[3].'</td><td>'.$row1[3].'</td>'; 
+			echo '<td>'.$rowAdSoyadStr.'</td><td>'.$rowAdresStr.'</td><td>'.$rowKadiStr.'</td><td>'.$rowEmailStr.'</td><td>Aktif</td>'; 
 			echo '<td> <div class="btn-group">';
             echo '  <a class="btn btn-primary" href="MusteriGuncelleme.php?ID='.$row1[5].'">Güncelle</a>';
             echo '  <p class="btn btn-danger" onClick="MusteriSil('.$row1[5].')">&nbsp&nbsp&nbsp&nbspSil&nbsp&nbsp&nbsp&nbsp</p>';

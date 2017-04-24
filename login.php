@@ -37,7 +37,7 @@
       <form class="form-signin" id="girisForm">
         <h2 class="form-signin-heading">Giriş</h2>
         <label >Kullanıcı Adı</label>
-        <input id="inputKullaniciAdi" name="inputKullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" autofocus>
+        <input id="inputKullaniciAdi" name="inputKullaniciAdi" maxLength="20" class="form-control" placeholder="Kullanıcı Adı" autofocus>
         <label >Parola</label>
         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Parola" >
 
